@@ -1,0 +1,52 @@
+.course-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #fafafa;
+padding: 0.5rem 0.75rem;
+border-radius: 6px;
+border: 1px solid #f0f0f0;
+transition: background 0.3s, border-color 0.3s;
+}
+
+.course-row:hover {
+background: #f1f1f1;
+border-color: #e1e1e1;
+}
+
+.course-info {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.course-name {
+font-weight: 600;
+line-height: 1.2;
+color: #444;
+}
+
+.course-code {
+font-weight: 400;
+color: #777;
+margin-left: 3px;
+}
+
+.course-credit {
+font-size: 0.9rem;
+color: #999;
+}
+
+.grade-input {
+width: 60px;
+padding: 0.35rem;
+text-align: center;
+border: 1px solid #ccc;
+border-radius: 4px;
+transition: border-color 0.3s;
+}
+
+.grade-input:focus {
+outline: none;
+border-color: #3949ab;
+}
