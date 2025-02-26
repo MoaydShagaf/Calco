@@ -1,0 +1,138 @@
+.combo-box {
+position: relative;
+display: inline-block;
+width: 200px; /* adjust as needed */
+font-family: Arial, sans-serif;
+}
+
+/* Label above the "input" */
+.combo-box-label {
+display: block;
+margin-bottom: 4px;
+font-weight: 600;
+}
+
+/* The "input" that user sees/clicks to open top-sheet */
+.combo-box-input {
+padding: 8px 10px;
+border: 1px solid #ccc;
+border-radius: 6px;
+background-color: #fff;
+cursor: pointer;
+user-select: none;
+}
+
+/* ===================== Top-Sheet Modal ===================== */
+.combo-box-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); /* dim background */
+z-index: 999; /* behind the sheet but above the page */
+}
+
+/* The top sheet container */
+.combo-box-top-sheet {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+/* Set a height or let content define it. Example: 60% of screen */
+height: 60%;
+background-color: #fff;
+z-index: 1000; /* above the overlay */
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+/* Slide-down animation from top (optional) */
+animation: comboBoxSlideDown 0.3s ease forwards;
+}
+
+/* Simple slide-down keyframes */
+@keyframes comboBoxSlideDown {
+0% {
+    transform: translateY(-100%);
+}
+100% {
+    transform: translateY(0);
+}
+}
+
+/* Header row: close button + search bar */
+.combo-box-top-sheet-header {
+display: flex;
+align-items: center;
+padding: 0.5rem;
+border-bottom: 1px solid #ddd;
+}
+
+.combo-box-close-btn {
+background: none;
+border: none;
+color: #333;
+font-size: 1.5rem;
+margin-right: 0.5rem;
+cursor: pointer;
+}
+
+.combo-box-search {
+flex: 1;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 6px;
+}
+
+/* The scrollable list area within the top sheet */
+.combo-box-top-sheet-list {
+flex: 1; /* if we used display: flex; flex-direction: column */
+overflow-y: auto;
+max-height: calc(100% - 60px); /* account for header height, etc. */
+padding: 0.5rem;
+}
+
+/* Each item */
+.combo-box-list-item {
+padding: 10px;
+border-bottom: 1px solid #eee;
+cursor: pointer;
+}
+
+.combo-box-list-item:hover {
+background-color: #f0f0f0;
+}
+
+.no-results {
+color: #888;
+text-align: center;
+font-style: italic;
+padding: 10px;
+}
+
+/* ===================== Non-Modal (Dropdown) ===================== */
+.combo-box-dropdown {
+position: absolute;
+z-index: 999;
+top: calc(100% + 2px);
+left: 0;
+width: 100%;
+background: #fff;
+border: 1px solid #ddd;
+border-radius: 6px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+padding: 8px;
+}
+
+.combo-box-list {
+max-height: 200px;
+overflow-y: auto;
+}
+
+.combo-box-list-item {
+padding: 6px;
+cursor: pointer;
+}
+
+.combo-box-list-item:hover {
+background: #f0f0f0;
+}

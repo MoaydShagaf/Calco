@@ -1,79 +1,78 @@
 /* src/styles/Semester.css */
 
-/* 
-Styles for each "semester card", including:
-- Collapsible header
-- Body with summary panel + course selector + CSV upload
-- A bit of animation and shadow
+/* 1) Semester Card Container 
+- Vibrant gradient background
+- Rounded corners
+- Hover scale & glow effect
 */
-
-/* The outer container (like a card) */
 .semester-card {
-background: #fff;
-border-radius: 10px;
-width: 350px;
+background: skyblue;
+border-radius: 12px;
+width: 360px;         /* Desktop default */
 max-width: 95vw;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-overflow: hidden;
-transition: 0.3s transform, 0.3s box-shadow;
-position: relative;
-/* a small margin if you want some space around each card */
 margin-bottom: 1rem;
+overflow: hidden;
+position: relative;
+
+/* Subtle 3D effect */
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .semester-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+transform: scale(1.03);
+box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* The clickable header for toggling open/close */
+/* 2) Semester Header 
+    - Slight translucent background 
+    - Big text 
+*/
 .semester-header {
 display: flex;
-justify-content: space-between;
 align-items: center;
-background: #f5f5f5;
+justify-content: space-between;
+background: rgba(255, 255, 255, 0.3);
 padding: 0.75rem 1rem;
 cursor: pointer;
-user-select: none; /* prevent text selection while clicking header */
+user-select: none;
 }
 
 .semester-title {
 margin: 0;
-font-size: 1.25rem;
+font-size: 1.3rem;
 font-weight: 600;
-color: #333;
+color: #fff;
+display: flex;
+align-items: center;
+gap: 0.4rem;
 }
 
 .semester-toggle {
-font-size: 1.2rem;
-color: #777;
+font-size: 1.3rem;
+color: #fff;
 }
 
+/* 3) Body */
 .semester-body {
+background: #fff; /* White body for better readability */
 padding: 1rem;
-/* you can animate the height if you want a smoother open/close,
-    but that usually requires additional logic (max-height transitions, etc.) */
 }
 
-/* 
-A summary "panel" at the top of the open semester 
-that shows the 4 metrics:
-    - Cumulative Points
-    - Cumulative Credits
-    - General %
-    - Semester %
+/* 4) Stats Summary Grid 
+    - Pastel background 
+    - Slight shadow 
 */
 .semester-summary {
 display: grid;
-grid-template-columns: 1fr 1fr; /* 2 columns, each item gets a half-width */
+grid-template-columns: 1fr 1fr;
 gap: 0.5rem 1rem;
-background: #fafafa;
-border: 1px solid #eee;
+background: #fdf3ff; /* pastel pink/white */
 border-radius: 8px;
 padding: 0.75rem 1rem;
 margin-bottom: 1rem;
 margin-top: 0.5rem;
-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .summary-item {
@@ -81,53 +80,48 @@ display: flex;
 flex-direction: column;
 font-size: 0.95rem;
 color: #444;
-margin-bottom: 0.3rem;
 }
 
 .summary-item span {
 color: #666;
-font-size: 0.88rem;
 margin-bottom: 3px;
+font-weight: 500;
 }
 
 .summary-item strong {
-font-weight: 600;
+font-weight: 700;
 color: #222;
 }
 
-/* 
-Add course row + dropdown
-*/
+/* 5) Add Course Row */
 .add-course-row {
 margin-bottom: 1rem;
 }
 
+/* The embedded ComboBox (or fallback select) */
 .course-selector {
 width: 100%;
-padding: 0.5rem;
+padding: 0.6rem;
 font-size: 1rem;
-border-radius: 4px;
+border-radius: 6px;
 border: 1px solid #ccc;
-transition: border-color 0.2s;
+transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .course-selector:focus {
 outline: none;
-border-color: #66bb6a;
+border-color: #ff80ab; /* bright pink accent */
+box-shadow: 0 0 0 2px rgba(255, 128, 171, 0.3);
 }
 
-/* 
-The list of Course components
-*/
+/* 6) Course List */
 .course-list {
 display: flex;
 flex-direction: column;
-gap: 0.5rem;
+gap: 0.75rem;
 }
 
-/* 
-CSV Upload Section
-*/
+/* 7) CSV Upload */
 .csv-upload {
 display: flex;
 align-items: center;
@@ -137,22 +131,23 @@ margin-top: 1rem;
 
 .csv-input {
 border: 1px solid #ccc;
-padding: 0.4rem;
-border-radius: 4px;
+padding: 0.45rem;
+border-radius: 6px;
 transition: border-color 0.2s;
 }
 
 .csv-input:focus {
 outline: none;
-border-color: #42a5f5;
+border-color: #80deea; /* teal accent */
+box-shadow: 0 0 0 2px rgba(128, 222, 234, 0.3);
 }
 
 .submit-csv-btn {
-background: #29b6f6;
+background: #ff80ab; /* Pink accent */
 border: none;
 color: #fff;
-padding: 0.45rem 1rem;
-border-radius: 4px;
+padding: 0.6rem 1rem;
+border-radius: 6px;
 cursor: pointer;
 font-size: 0.9rem;
 transition: background 0.3s, box-shadow 0.3s;
@@ -164,6 +159,38 @@ cursor: not-allowed;
 }
 
 .submit-csv-btn:hover:not(:disabled) {
-background: #0288d1;
+background: #e46792;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* 8) Responsive Tweaks */
+
+/* For screens narrower than 480px */
+@media (max-width: 480px) {
+.semester-card {
+    width: 100%; /* Let the card occupy full width */
+    margin-bottom: 1rem;
+    border-radius: 8px; /* slightly smaller rounding for mobile */
+}
+
+/* Switch stats summary to a single column */
+.semester-summary {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+/* Slightly reduce padding for better fit */
+.semester-body {
+    padding: 0.75rem;
+}
+
+.csv-upload {
+    flex-direction: column; /* Stack CSV input & button vertically */
+    align-items: stretch;
+}
+
+.submit-csv-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+}
 }

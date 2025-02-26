@@ -31,7 +31,7 @@ const Course: React.FC<CourseProps> = ({
         value={grade}
         onChange={(e) => onUpdateGrade(code, Number(e.target.value))}
         className="grade-input"
-        placeholder="Grade"
+        placeholder="الدرجة"
       />
     </div>
   );
