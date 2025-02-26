@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "./styles/App.css";
 import Semester from "./components/Semester";
 import coursesData from "./data/courses.json";
@@ -68,7 +68,7 @@ const App: React.FC = () => {
     );
   };
 
-  const updateGrade = (semesterId: number, courseCode: string, grade: number) => {
+  const updateGrade = (semesterId: number, courseCode: string, grade: number | "")  => {
     setSemesters((prev) =>
       prev.map((semester) =>
         semester.id === semesterId
