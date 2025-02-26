@@ -6,7 +6,7 @@ interface CourseProps {
   name: string;
   credit: number;
   grade: number | "";
-  onUpdateGrade: (code: string, grade: number) => void;
+  onUpdateGrade: (code: string, grade: number | "") => void; // Allow empty string
 }
 
 const Course: React.FC<CourseProps> = ({
@@ -25,11 +25,19 @@ const Course: React.FC<CourseProps> = ({
         <span className="course-credit">{credit} credits</span>
       </div>
       <input
-        type="number"
-        min="0"
-        max="100"
+        type="text" // Change to text to control input behavior
+        inputMode="numeric" // Ensures number keyboard on mobile
+        pattern="^\d{0,3}$" // Only allows numbers up to 3 digits
+        maxLength={3} // Restrict input length to 3 digits
         value={grade}
-        onChange={(e) => onUpdateGrade(code, Number(e.target.value))}
+        onChange={(e) => {
+          let newValue = e.target.value.replace(/^0+(?=\d)/, ""); // Remove leading zeros
+          if (newValue === "") {
+            onUpdateGrade(code, ""); // Allow empty input
+          } else if (/^\d+$/.test(newValue) && Number(newValue) <= 100) {
+            onUpdateGrade(code, Number(newValue)); // Convert valid input to number
+          }
+        }}
         className="grade-input"
         placeholder="الدرجة"
       />

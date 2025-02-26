@@ -7,6 +7,7 @@ padding: 0.5rem 0.75rem;
 border-radius: 6px;
 border: 1px solid #f0f0f0;
 transition: background 0.3s, border-color 0.3s;
+width: 100%;
 }
 
 .course-row:hover {

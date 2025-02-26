@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./styles/App.css"; // Updated styling
+import React, { useState, useEffect, useRef } from "react";
+import "./styles/App.css";
 import Semester from "./components/Semester";
 import coursesData from "./data/courses.json";
 import Header from "./components/Header";
@@ -29,6 +29,9 @@ const App: React.FC = () => {
   const [semesters, setSemesters] = useState<SemesterType[]>([]);
   const [department, setDepartment] = useState<string>("");
 
+  // Reference to the last semester added
+  const lastSemesterRef = useRef<HTMLDivElement | null>(null);
+
   // Recompute stats whenever semesters change
   const stats = computeAllSemesterStats(semesters);
 
@@ -41,6 +44,11 @@ const App: React.FC = () => {
       ...prev,
       { id: prev.length + 1, courses: [] },
     ]);
+
+    // Scroll to the newly added semester
+    setTimeout(() => {
+      lastSemesterRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   const addCourseToSemester = (semesterId: number, courseCode: string) => {
@@ -92,13 +100,10 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      {/* Top header (logo + link) */}
       <Header />
 
-      {/* Main content */}
       <main className="main-content">
         <div className="container">
-          {/* Department + Add Semester Row */}
           <div className="top-controls">
             <label htmlFor="department-select">القسم:</label>
             <select
@@ -127,20 +132,23 @@ const App: React.FC = () => {
             </button>
           </div>
 
-          {/* Grid of Semester Cards */}
           <div className="semesters-grid">
-            {semesters.map((semester) => {
+            {semesters.map((semester, index) => {
               const s = stats.find((st) => st.semesterId === semester.id);
               return (
-                <Semester
+                <div
                   key={semester.id}
-                  id={semester.id}
-                  courses={semester.courses}
-                  onAddCourse={addCourseToSemester}
-                  onUpdateGrade={updateGrade}
-                  onBulkAddCourses={bulkAddCourses}
-                  stats={s}
-                />
+                  ref={index === semesters.length - 1 ? lastSemesterRef : null}
+                >
+                  <Semester
+                    id={semester.id}
+                    courses={semester.courses}
+                    stats={s}
+                    onAddCourse={addCourseToSemester}
+                    onUpdateGrade={updateGrade}
+                    onBulkAddCourses={bulkAddCourses}
+                  />
+                </div>
               );
             })}
           </div>

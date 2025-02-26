@@ -19,7 +19,7 @@ interface SemesterProps {
   courses: CourseType[];
   stats?: SemesterStats;
   onAddCourse: (semesterId: number, courseCode: string) => void;
-  onUpdateGrade: (semesterId: number, courseCode: string, grade: number) => void;
+  onUpdateGrade: (semesterId: number, courseCode: string, grade: number | "") => void;
   onBulkAddCourses: (semesterId: number, newCourses: CourseType[]) => void;
 }
 
