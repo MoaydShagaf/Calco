@@ -1,0 +1,31 @@
+.app-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #282c34;
+padding: 1rem 2rem;
+color: white;
+direction: rtl; /* يضمن دعم الاتجاه من اليمين لليسار */
+}
+
+.app-title {
+display: flex;
+align-items: center;
+font-size: 1.8rem;
+}
+
+.app-icon {
+margin-left: 10px; /* يعكس الاتجاه ليكون متناسقًا مع اللغة العربية */
+color: #61dafb;
+}
+
+.course-creator-link {
+text-decoration: none;
+color: #61dafb;
+font-size: 1rem;
+transition: color 0.3s ease;
+}
+
+.course-creator-link:hover {
+color: #a1e3ff;
+}

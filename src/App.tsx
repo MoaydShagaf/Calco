@@ -1,12 +1,10 @@
-// src/App.tsx
-
 import React, { useState } from "react";
 import "./styles/App.css";
 import Semester from "./components/Semester";
 import coursesData from "./data/courses.json";
-import { FaRocket } from "react-icons/fa";
+import Header from "./components/Header"; // استيراد المكون الجديد للرأس
 
-// Import stats logic
+// استيراد منطق الحسابات
 import { computeAllSemesterStats } from "./utils/Calculations";
 
 interface Course {
@@ -22,20 +20,20 @@ interface SemesterType {
 }
 
 const DEPARTMENTS = [
-  "Electrical and Electronics",
-  "Civil",
-  "Nuclear",
-  "Computer",
-  "Mechanical",
+  "الهندسة الكهربائية والإلكترونية",
+  "الهندسة المدنية",
+  "الهندسة النووية",
+  "هندسة الحاسوب",
+  "الهندسة الميكانيكية",
 ];
 
 const App: React.FC = () => {
   const [semesters, setSemesters] = useState<SemesterType[]>([]);
 
-  // Track the currently selected department
+  // تتبع القسم الحالي المحدد
   const [department, setDepartment] = useState<string>("");
 
-  // Recompute stats every time 'semesters' changes
+  // إعادة حساب الإحصائيات عند تغيير الفصول الدراسية
   const stats = computeAllSemesterStats(semesters);
 
   const handleDepartmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -43,10 +41,7 @@ const App: React.FC = () => {
   };
 
   const addSemester = () => {
-    setSemesters((prev) => [
-      ...prev,
-      { id: prev.length + 1, courses: [] },
-    ]);
+    setSemesters((prev) => [...prev, { id: prev.length + 1, courses: [] }]);
   };
 
   const addCourseToSemester = (semesterId: number, courseCode: string) => {
@@ -80,9 +75,7 @@ const App: React.FC = () => {
           ? {
               ...semester,
               courses: semester.courses.map((course) =>
-                course.code === courseCode
-                  ? { ...course, grade }
-                  : course
+                course.code === courseCode ? { ...course, grade } : course
               ),
             }
           : semester
@@ -105,26 +98,18 @@ const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      <header className="app-header">
-        <h1 className="app-title">
-          <FaRocket className="app-icon" />
-          My Jaw-Dropping University Planner
-        </h1>
-        <a href="#" className="course-creator-link">
-          Go to Course Creator
-        </a>
-      </header>
+      <Header /> {/* استخدام مكون الرأس المنفصل */}
 
       <main className="app-main">
         <div className="department-row">
-          <label htmlFor="department-select">Department:</label>
+          <label htmlFor="department-select">القسم:</label>
           <select
             id="department-select"
             value={department}
             onChange={handleDepartmentChange}
           >
             <option value="" disabled>
-              Select Department
+              اختر القسم
             </option>
             {DEPARTMENTS.map((dept) => (
               <option key={dept} value={dept}>
@@ -133,21 +118,19 @@ const App: React.FC = () => {
             ))}
           </select>
 
-          {/* Optionally display the chosen department */}
           {department && (
             <span className="chosen-dept">
-              Current Dept: <strong>{department}</strong>
+              القسم الحالي: <strong>{department}</strong>
             </span>
           )}
         </div>
 
         <button className="add-semester-btn" onClick={addSemester}>
-          ➕ Add Semester
+          ➕ إضافة فصل دراسي
         </button>
 
         <div className="semesters-grid">
           {semesters.map((semester) => {
-            // retrieve the stats for this semester
             const s = stats.find((st) => st.semesterId === semester.id);
 
             return (
@@ -158,7 +141,7 @@ const App: React.FC = () => {
                 onAddCourse={addCourseToSemester}
                 onUpdateGrade={updateGrade}
                 onBulkAddCourses={bulkAddCourses}
-                stats={s} // pass the computed stats down
+                stats={s} // تمرير الإحصائيات المحسوبة
               />
             );
           })}

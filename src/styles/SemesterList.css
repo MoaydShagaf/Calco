@@ -1,0 +1,8 @@
+/* src/styles/SemesterList.css */
+
+.semesters-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+justify-content: flex-start;
+}

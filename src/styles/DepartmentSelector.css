@@ -1,0 +1,24 @@
+/* src/styles/DepartmentSelector.css */
+
+.department-row {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+
+.dept-label {
+font-weight: 500;
+}
+
+.dept-select {
+padding: 0.4rem 0.6rem;
+border-radius: 4px;
+border: 1px solid #ccc;
+font-size: 1rem;
+}
+
+.chosen-dept {
+font-size: 0.95rem;
+color: #444;
+}
