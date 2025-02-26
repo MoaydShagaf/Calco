@@ -1,37 +1,22 @@
-/* src/styles/Semester.css */
-
-/* 1) Semester Card Container 
-- Vibrant gradient background
-- Rounded corners
-- Hover scale & glow effect
-*/
 .semester-card {
 background: skyblue;
 border-radius: 12px;
-width: 360px;         /* Desktop default */
+width: 360px; /* Desktop default */
 max-width: 95vw;
-margin-bottom: 1rem;
+margin: 1rem auto; /* Center the card horizontally */
 overflow: hidden;
 position: relative;
+text-align: center; /* Center text inside */
 
 /* Subtle 3D effect */
 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.semester-card:hover {
-transform: scale(1.03);
-box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-}
-
-/* 2) Semester Header 
-    - Slight translucent background 
-    - Big text 
-*/
 .semester-header {
 display: flex;
 align-items: center;
-justify-content: space-between;
+justify-content: center; /* Center title and toggle */
 background: rgba(255, 255, 255, 0.3);
 padding: 0.75rem 1rem;
 cursor: pointer;
@@ -51,56 +36,61 @@ gap: 0.4rem;
 .semester-toggle {
 font-size: 1.3rem;
 color: #fff;
+margin-left: auto; /* Keep toggle aligned */
 }
 
-/* 3) Body */
+/* Center everything inside the body */
 .semester-body {
-background: #fff; /* White body for better readability */
+background: #fff;
 padding: 1rem;
+display: flex;
+flex-direction: column;
+align-items: center; /* Centers all child elements */
+justify-content: center;
 }
 
-/* 4) Stats Summary Grid 
-    - Pastel background 
-    - Slight shadow 
-*/
 .semester-summary {
 display: grid;
 grid-template-columns: 1fr 1fr;
 gap: 0.5rem 1rem;
-background: #fdf3ff; /* pastel pink/white */
+background: #fdf3ff;
 border-radius: 8px;
 padding: 0.75rem 1rem;
 margin-bottom: 1rem;
 margin-top: 0.5rem;
 box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+text-align: center; /* Center text */
+width: 100%;
 }
 
+/* Center stats text */
 .summary-item {
 display: flex;
 flex-direction: column;
+align-items: center;
 font-size: 0.95rem;
 color: #444;
 }
 
-.summary-item span {
-color: #666;
-margin-bottom: 3px;
-font-weight: 500;
+/* Center the course list */
+.course-list {
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+align-items: center; /* Centers courses */
 }
 
-.summary-item strong {
-font-weight: 700;
-color: #222;
-}
-
-/* 5) Add Course Row */
+/* Center the add course row */
 .add-course-row {
+width: 100%;
+display: flex;
+justify-content: center;
 margin-bottom: 1rem;
 }
 
-/* The embedded ComboBox (or fallback select) */
+/* Center the ComboBox */
 .course-selector {
-width: 100%;
+width: 90%;
 padding: 0.6rem;
 font-size: 1rem;
 border-radius: 6px;
@@ -108,42 +98,18 @@ border: 1px solid #ccc;
 transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.course-selector:focus {
-outline: none;
-border-color: #ff80ab; /* bright pink accent */
-box-shadow: 0 0 0 2px rgba(255, 128, 171, 0.3);
-}
-
-/* 6) Course List */
-.course-list {
-display: flex;
-flex-direction: column;
-gap: 0.75rem;
-}
-
-/* 7) CSV Upload */
+/* Center the CSV upload */
 .csv-upload {
 display: flex;
+flex-direction: column;
 align-items: center;
 gap: 0.5rem;
 margin-top: 1rem;
 }
 
-.csv-input {
-border: 1px solid #ccc;
-padding: 0.45rem;
-border-radius: 6px;
-transition: border-color 0.2s;
-}
-
-.csv-input:focus {
-outline: none;
-border-color: #80deea; /* teal accent */
-box-shadow: 0 0 0 2px rgba(128, 222, 234, 0.3);
-}
-
+/* Center the submit button */
 .submit-csv-btn {
-background: #ff80ab; /* Pink accent */
+background: #ff80ab;
 border: none;
 color: #fff;
 padding: 0.6rem 1rem;
@@ -163,34 +129,29 @@ background: #e46792;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* 8) Responsive Tweaks */
-
-/* For screens narrower than 480px */
+/* Responsive: Adjust for small screens */
 @media (max-width: 480px) {
 .semester-card {
-    width: 100%; /* Let the card occupy full width */
-    margin-bottom: 1rem;
-    border-radius: 8px; /* slightly smaller rounding for mobile */
+width: 100%;
+margin-bottom: 1rem;
+border-radius: 8px;
 }
 
-/* Switch stats summary to a single column */
 .semester-summary {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+grid-template-columns: 1fr;
+gap: 0.75rem;
 }
 
-/* Slightly reduce padding for better fit */
 .semester-body {
-    padding: 0.75rem;
+padding: 0.75rem;
 }
 
 .csv-upload {
-    flex-direction: column; /* Stack CSV input & button vertically */
-    align-items: stretch;
+align-items: center;
 }
 
 .submit-csv-btn {
-    width: 100%;
-    margin-top: 0.5rem;
+width: 100%;
+margin-top: 0.5rem;
 }
 }

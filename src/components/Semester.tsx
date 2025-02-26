@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/Semester.css";
 import coursesData from "../data/courses.json";
 import Course from "./Course";
-import ComboBox from "./ComboBox"; // <--- Import the ComboBox
+import ComboBox from "./ComboBox";
 import Papa from "papaparse";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { SemesterStats } from "../utils/Calculations";
@@ -33,9 +33,7 @@ const Semester: React.FC<SemesterProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [csvFile, setCsvFile] = useState<File | null>(null);
-
-  // Keep track of the currently chosen course code in the ComboBox
-  const [chosenCourse, setChosenCourse] = useState("");
+  const [chosenCourse, setChosenCourse] = useState<string>("");
 
   const handleCSVUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -49,7 +47,7 @@ const Semester: React.FC<SemesterProps> = ({
 
     Papa.parse(csvFile, {
       complete: (result) => {
-        const csvData = result.data as string[][]; // [رمز المقرر, الدرجة]
+        const csvData = result.data as string[][];
         const newCourses: CourseType[] = [];
 
         csvData.forEach(([code, grade]) => {
@@ -72,16 +70,14 @@ const Semester: React.FC<SemesterProps> = ({
     setCsvFile(null);
   };
 
-  // We'll display courses by their "code" in the combo box
-  // (You could also show "code + name" if you prefer)
   const courseOptions = coursesData.map((c) => c.code);
 
   const handleComboBoxChange = (selectedCode: string) => {
-    // Update local state so ComboBox knows what we chose
+    if (!selectedCode) return;
     setChosenCourse("");
-    // Immediately call onAddCourse
     onAddCourse(id, selectedCode);
   };
+
 
   return (
     <div className="semester-card">
@@ -98,7 +94,6 @@ const Semester: React.FC<SemesterProps> = ({
 
       {isOpen && (
         <div className="semester-body">
-          {/* Stats summary */}
           {stats && (
             <div className="semester-summary">
               <div className="summary-item">
@@ -120,19 +115,14 @@ const Semester: React.FC<SemesterProps> = ({
             </div>
           )}
 
-          {/* Instead of a <select>, use the ComboBox! */}
           <div className="add-course-row">
             <ComboBox
-              label="📘 إضافة مقرّر"
-              placeholder="ابحث عن المقرّر..."
               options={courseOptions}
               value={chosenCourse}
               onChange={handleComboBoxChange}
-              useModal={true} // or false for a simple dropdown
             />
           </div>
 
-          {/* Course list */}
           <div className="course-list">
             {courses.map((course) => (
               <Course
@@ -146,7 +136,6 @@ const Semester: React.FC<SemesterProps> = ({
             ))}
           </div>
 
-          {/* CSV Upload */}
           <div className="csv-upload">
             <input
               type="file"

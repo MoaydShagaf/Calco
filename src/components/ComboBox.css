@@ -1,138 +1,123 @@
 .combo-box {
 position: relative;
 display: inline-block;
-width: 200px; /* adjust as needed */
-font-family: Arial, sans-serif;
+width: 100%;
+font-family: "SF Pro", Arial, sans-serif; /* Matches iOS font */
 }
 
-/* Label above the "input" */
+/* Label */
 .combo-box-label {
 display: block;
 margin-bottom: 4px;
 font-weight: 600;
 }
 
-/* The "input" that user sees/clicks to open top-sheet */
+/* Input (Button) */
 .combo-box-input {
-padding: 8px 10px;
+padding: 12px 14px;
+font-size: 18px; /* Bigger font for better readability */
 border: 1px solid #ccc;
-border-radius: 6px;
+border-radius: 10px;
 background-color: #fff;
 cursor: pointer;
 user-select: none;
 }
 
-/* ===================== Top-Sheet Modal ===================== */
+/* Background overlay */
 .combo-box-overlay {
 position: fixed;
 top: 0;
 left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5); /* dim background */
-z-index: 999; /* behind the sheet but above the page */
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 9999;
 }
 
-/* The top sheet container */
+/* Full-screen modal */
 .combo-box-top-sheet {
 position: fixed;
 top: 0;
 left: 0;
-width: 100%;
-/* Set a height or let content define it. Example: 60% of screen */
-height: 60%;
+width: 100vw;
+height: calc(var(--vh, 1vh) * 60);
+min-height: 60%;
+max-height: 100%;
 background-color: #fff;
-z-index: 1000; /* above the overlay */
+z-index: 10000;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-
-/* Slide-down animation from top (optional) */
+transform: translateY(0);
 animation: comboBoxSlideDown 0.3s ease forwards;
 }
 
-/* Simple slide-down keyframes */
+/* Slide-down animation */
 @keyframes comboBoxSlideDown {
 0% {
-    transform: translateY(-100%);
+transform: translateY(-100%);
 }
 100% {
-    transform: translateY(0);
+transform: translateY(0);
 }
 }
 
-/* Header row: close button + search bar */
+/* Header */
 .combo-box-top-sheet-header {
 display: flex;
 align-items: center;
-padding: 0.5rem;
+padding: 1rem;
 border-bottom: 1px solid #ddd;
 }
 
+/* Close button */
 .combo-box-close-btn {
 background: none;
 border: none;
-color: #333;
-font-size: 1.5rem;
-margin-right: 0.5rem;
+color: #777;
+font-size: 14px; /* Smaller size for close button */
+font-weight: bold;
 cursor: pointer;
+margin-right: auto;
 }
 
+/* Search input */
 .combo-box-search {
 flex: 1;
-padding: 8px;
+padding: 12px;
+font-size: 18px; /* Larger font for better readability */
 border: 1px solid #ccc;
-border-radius: 6px;
+border-radius: 8px;
 }
 
-/* The scrollable list area within the top sheet */
+/* Options list */
 .combo-box-top-sheet-list {
-flex: 1; /* if we used display: flex; flex-direction: column */
+flex: 1;
 overflow-y: auto;
-max-height: calc(100% - 60px); /* account for header height, etc. */
-padding: 0.5rem;
+max-height: calc(100% - 60px);
+padding: 1rem;
 }
 
-/* Each item */
+/* Each list item */
 .combo-box-list-item {
-padding: 10px;
-border-bottom: 1px solid #eee;
+padding: 14px;
+font-size: 18px; /* Bigger font to match iOS */
+border-bottom: 1px solid #eee; /* Thin divider */
 cursor: pointer;
 }
 
+/* Last item should not have a border */
+.combo-box-list-item:last-child {
+border-bottom: none;
+}
+
+/* Hover effect */
 .combo-box-list-item:hover {
 background-color: #f0f0f0;
 }
 
+/* No results */
 .no-results {
 color: #888;
 text-align: center;
 font-style: italic;
 padding: 10px;
-}
-
-/* ===================== Non-Modal (Dropdown) ===================== */
-.combo-box-dropdown {
-position: absolute;
-z-index: 999;
-top: calc(100% + 2px);
-left: 0;
-width: 100%;
-background: #fff;
-border: 1px solid #ddd;
-border-radius: 6px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-padding: 8px;
-}
-
-.combo-box-list {
-max-height: 200px;
-overflow-y: auto;
-}
-
-.combo-box-list-item {
-padding: 6px;
-cursor: pointer;
-}
-
-.combo-box-list-item:hover {
-background: #f0f0f0;
 }

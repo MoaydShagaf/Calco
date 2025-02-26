@@ -7,12 +7,12 @@ interface ComboBoxProps {
   options: string[];
   value: string;
   onChange: (newValue: string) => void;
-  useModal?: boolean;  // If false, it will be a simple dropdown
+  useModal?: boolean;
 }
 
 const ComboBox: React.FC<ComboBoxProps> = ({
   label,
-  placeholder = "Search...",
+  placeholder = "إضافة مادة",
   options,
   value,
   onChange,
@@ -20,33 +20,34 @@ const ComboBox: React.FC<ComboBoxProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
-
   const containerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  // Filter options by search text
-  const filteredOptions = options.filter((opt) =>
-    opt.toLowerCase().includes(searchText.toLowerCase())
-  );
+  useEffect(() => {
+    const adjustViewportHeight = () => {
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+    adjustViewportHeight();
+    window.addEventListener("resize", adjustViewportHeight);
+    return () => window.removeEventListener("resize", adjustViewportHeight);
+  }, []);
 
-  // Close if clicked outside (for non-modal usage)
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (
-        containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
+        isOpen &&
+        modalRef.current &&
+        !modalRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false);
       }
     }
-    if (!useModal) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      if (!useModal) {
-        document.removeEventListener("mousedown", handleClickOutside);
-      }
-    };
-  }, [useModal]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   const handleSelect = (selected: string) => {
     onChange(selected);
@@ -58,7 +59,6 @@ const ComboBox: React.FC<ComboBoxProps> = ({
     <div className="combo-box" ref={containerRef}>
       {label && <label className="combo-box-label">{label}</label>}
 
-      {/* The "input" that triggers the combo-box */}
       <div
         className="combo-box-input"
         onClick={() => setIsOpen(true)}
@@ -68,20 +68,13 @@ const ComboBox: React.FC<ComboBoxProps> = ({
         {value || placeholder}
       </div>
 
-      {/* ------------------ Top-Sheet Modal Version ------------------ */}
       {isOpen && useModal && (
         <>
-          {/* Dark overlay dims the background */}
           <div className="combo-box-overlay" onClick={() => setIsOpen(false)} />
-
-          {/* Top-sheet container, anchored to the top of the screen */}
-          <div className="combo-box-top-sheet">
+          <div className="combo-box-top-sheet" ref={modalRef}>
             <div className="combo-box-top-sheet-header">
-              <button
-                className="combo-box-close-btn"
-                onClick={() => setIsOpen(false)}
-              >
-                &times;
+              <button className="combo-box-close-btn" onClick={() => setIsOpen(false)}>
+                ✖ إغلاق
               </button>
 
               <input
@@ -94,26 +87,27 @@ const ComboBox: React.FC<ComboBoxProps> = ({
             </div>
 
             <div className="combo-box-top-sheet-list">
-              {filteredOptions.map((opt) => (
-                <div
-                  key={opt}
-                  className="combo-box-list-item"
-                  onClick={() => handleSelect(opt)}
-                >
-                  {opt}
-                </div>
-              ))}
-              {filteredOptions.length === 0 && (
-                <div className="combo-box-list-item no-results">
-                  لا يوجد نتائج
-                </div>
+              {options
+                .filter((opt) =>
+                  opt.toLowerCase().includes(searchText.toLowerCase())
+                )
+                .map((opt, index) => (
+                  <div
+                    key={opt}
+                    className={`combo-box-list-item ${index !== options.length - 1 ? "combo-box-divider" : ""}`}
+                    onClick={() => handleSelect(opt)}
+                  >
+                    {opt}
+                  </div>
+                ))}
+              {options.length === 0 && (
+                <div className="combo-box-list-item no-results">لا يوجد نتائج</div>
               )}
             </div>
           </div>
         </>
       )}
 
-      {/* ------------------ Non-Modal (Dropdown) ------------------ */}
       {isOpen && !useModal && (
         <div className="combo-box-dropdown">
           <input
@@ -124,19 +118,21 @@ const ComboBox: React.FC<ComboBoxProps> = ({
             onChange={(e) => setSearchText(e.target.value)}
           />
           <div className="combo-box-list">
-            {filteredOptions.map((opt) => (
-              <div
-                key={opt}
-                className="combo-box-list-item"
-                onClick={() => handleSelect(opt)}
-              >
-                {opt}
-              </div>
-            ))}
-            {filteredOptions.length === 0 && (
-              <div className="combo-box-list-item no-results">
-                لا يوجد نتائج
-              </div>
+            {options
+              .filter((opt) =>
+                opt.toLowerCase().includes(searchText.toLowerCase())
+              )
+              .map((opt, index) => (
+                <div
+                  key={opt}
+                  className={`combo-box-list-item ${index !== options.length - 1 ? "combo-box-divider" : ""}`}
+                  onClick={() => handleSelect(opt)}
+                >
+                  {opt}
+                </div>
+              ))}
+            {options.length === 0 && (
+              <div className="combo-box-list-item no-results">لا يوجد نتائج</div>
             )}
           </div>
         </div>
