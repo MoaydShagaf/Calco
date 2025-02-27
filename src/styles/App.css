@@ -110,6 +110,68 @@ padding: var(--spacing-sm);
 }
 
 .top-controls {
-  justify-content: center;
+justify-content: center;
 }
+}
+
+.progress-controls {
+display: flex;
+gap: 12px;
+margin-left: 0;
+}
+
+/* Save Progress Button */
+.save-progress-btn {
+background: linear-gradient(45deg, #28a745, #5bd65b);
+color: #fff;
+box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+font-size: 0.9rem;
+padding: 10px 16px;
+border-radius: 8px;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.save-progress-btn:hover {
+background: linear-gradient(45deg, #1e7e34, #3cb371);
+box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+}
+
+.save-progress-btn:active {
+transform: scale(0.95);
+}
+
+/* Clear Progress Button with Confirmation Tooltip */
+.clear-progress-btn {
+background: linear-gradient(45deg, #dc3545, #ff4d4d);
+color: #fff;
+box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+font-size: 0.9rem;
+padding: 10px 16px;
+border-radius: 8px;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+position: relative;
+}
+
+.clear-progress-btn:hover {
+background: linear-gradient(45deg, #c82333, #e60000);
+box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
+
+/* Tooltip to warn users about clearing progress */
+.clear-progress-btn:hover::after {
+content: "Caution: This will delete your progress";
+position: absolute;
+bottom: -35px;
+left: 50%;
+transform: translateX(-50%);
+background: rgba(0, 0, 0, 0.8);
+color: #fff;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 0.8rem;
+white-space: nowrap;
+}
+
+.clear-progress-btn:active {
+transform: scale(0.95);
 }

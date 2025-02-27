@@ -1,5 +1,5 @@
 .semester-card {
-background: skyblue;
+background: rgb(29, 121, 158);
 border-radius: 12px;
 width: 360px; /* Desktop default */
 max-width: 95vw;
@@ -109,7 +109,7 @@ margin-top: 1rem;
 
 /* Center the submit button */
 .submit-csv-btn {
-background: #ff80ab;
+background: #ff0000;
 border: none;
 color: #fff;
 padding: 0.6rem 1rem;
@@ -120,12 +120,12 @@ transition: background 0.3s, box-shadow 0.3s;
 }
 
 .submit-csv-btn:disabled {
-opacity: 0.5;
+opacity: 0.75;
 cursor: not-allowed;
 }
 
 .submit-csv-btn:hover:not(:disabled) {
-background: #e46792;
+background: #ff0000;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 

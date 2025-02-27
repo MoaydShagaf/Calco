@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../styles/Semester.css";
-import coursesData from "../data/courses.json";
 import Course from "./Course";
 import ComboBox from "./ComboBox";
 import Papa from "papaparse";
@@ -18,6 +17,8 @@ interface SemesterProps {
   id: number;
   courses: CourseType[];
   stats?: SemesterStats;
+  // New prop: the list of all available courses (either just general or general + EEE)
+  allCourses: CourseType[];
   onAddCourse: (semesterId: number, courseCode: string) => void;
   onUpdateGrade: (semesterId: number, courseCode: string, grade: number | "") => void;
   onBulkAddCourses: (semesterId: number, newCourses: CourseType[]) => void;
@@ -27,6 +28,7 @@ const Semester: React.FC<SemesterProps> = ({
   id,
   courses,
   stats,
+  allCourses,
   onAddCourse,
   onUpdateGrade,
   onBulkAddCourses,
@@ -51,7 +53,7 @@ const Semester: React.FC<SemesterProps> = ({
         const newCourses: CourseType[] = [];
 
         csvData.forEach(([code, grade]) => {
-          const course = coursesData.find(
+          const course = allCourses.find(
             (c) => c.code === code.trim().toUpperCase()
           );
           if (course && !isNaN(Number(grade))) {
@@ -70,14 +72,13 @@ const Semester: React.FC<SemesterProps> = ({
     setCsvFile(null);
   };
 
-  const courseOptions = coursesData.map((c) => c.code);
+  const courseOptions = allCourses.map((c) => c.code);
 
   const handleComboBoxChange = (selectedCode: string) => {
     if (!selectedCode) return;
     setChosenCourse("");
     onAddCourse(id, selectedCode);
   };
-
 
   return (
     <div className="semester-card">

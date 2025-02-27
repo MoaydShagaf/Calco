@@ -82,17 +82,18 @@ margin-right: auto;
 /* Search input */
 .combo-box-search {
 flex: 1;
-padding: 12px;
-font-size: 18px; /* Larger font for better readability */
+padding: 0.5em;
+font-size: 0.9em; /* Larger font for better readability */
 border: 1px solid #ccc;
 border-radius: 8px;
+margin: 0.5em;
 }
 
 /* Options list */
 .combo-box-top-sheet-list {
 flex: 1;
 overflow-y: auto;
-max-height: calc(100% - 60px);
+max-height: calc(100% - 5rem);
 padding: 1rem;
 }
 
