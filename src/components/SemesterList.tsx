@@ -43,6 +43,7 @@ const SemesterList: React.FC<SemesterListProps> = ({
             id={semester.id}
             courses={semester.courses}
             stats={s}
+            allCourses={semester.courses}
             onAddCourse={onAddCourse}
             onUpdateGrade={onUpdateGrade}
             onBulkAddCourses={onBulkAddCourses}
