@@ -1,12 +1,10 @@
-/**
- * useSemesters.ts
- * Custom hook for managing semesters, course data, and local storage progress.
- */
 
 import { useState, useEffect, useRef } from "react";
 import generalCourses from "../data/general.json";
 import eeeCourses from "../data/eee.json";
+import nuclearCourses from "../data/nuclear.json";
 import { computeAllSemesterStats } from "../utils/Calculations";
+import { DepartmentKey } from "../constants/DEPARTMENTS";
 
 export interface Course {
   code: string;
@@ -21,12 +19,12 @@ export interface SemesterType {
 }
 
 interface UserProgress {
-  department: string;
+  department: DepartmentKey | "";
   semesters: SemesterType[];
 }
 
 export const useSemesters = () => {
-  const [department, setDepartment] = useState<string>("");
+  const [department, setDepartment] = useState<DepartmentKey | "">("");
   const [semesters, setSemesters] = useState<SemesterType[]>([]);
   const [coursesData, setCoursesData] = useState<Course[]>([]);
   const lastSemesterRef = useRef<HTMLDivElement | null>(null);
@@ -49,13 +47,19 @@ export const useSemesters = () => {
 
   // Update courses data based on department selection
   useEffect(() => {
-    const updatedCourses =
-      department === "الهندسة الكهربائية والإلكترونية"
-        ? [
-            ...generalCourses.map((course) => ({ ...course, grade: emptyGrade })),
-            ...eeeCourses.map((course) => ({ ...course, grade: emptyGrade })),
-          ]
-        : generalCourses.map((course) => ({ ...course, grade: emptyGrade }));
+    let updatedCourses = generalCourses.map((course) => ({
+      ...course,
+      grade: emptyGrade,
+    }));
+
+    switch (department) {
+      case "EEE":
+        updatedCourses = [...updatedCourses, ...eeeCourses.map((course) => ({ ...course, grade: emptyGrade }))];
+        break;
+      case "NUCLEAR":
+        updatedCourses = [...updatedCourses, ...nuclearCourses.map((course) => ({ ...course, grade: emptyGrade }))];
+        break;
+    }
 
     setCoursesData(updatedCourses);
   }, [department]);

@@ -3,15 +3,8 @@ import Header from "./components/Header";
 import Semester from "./components/Semester";
 import Modal from "./components/Modal";
 import { useSemesters } from "./hooks/useSemesters";
+import { DEPARTMENTS, DepartmentKey } from "./constants/DEPARTMENTS";
 import "./styles/App.css";
-
-const DEPARTMENTS = [
-  "الهندسة الكهربائية والإلكترونية",
-  "الهندسة المدنية",
-  "الهندسة النووية",
-  "هندسة الحاسوب",
-  "الهندسة الميكانيكية",
-];
 
 const App: React.FC = () => {
   const {
@@ -55,21 +48,23 @@ const App: React.FC = () => {
             <select
               id="department-select"
               value={department}
-              onChange={(e) => setDepartment(e.target.value)}
+              onChange={(e) =>
+                setDepartment(e.target.value as DepartmentKey)
+              }
             >
               <option value="" disabled>
                 اختر القسم
               </option>
-              {DEPARTMENTS.map((dept) => (
-                <option key={dept} value={dept}>
-                  {dept}
+              {Object.entries(DEPARTMENTS).map(([key, name]) => (
+                <option key={key} value={key}>
+                  {name}
                 </option>
               ))}
             </select>
 
             {department && (
               <span className="current-dept">
-                القسم الحالي: <strong>{department}</strong>
+                القسم الحالي: <strong>{DEPARTMENTS[department as DepartmentKey]}</strong>
               </span>
             )}
 
@@ -113,11 +108,7 @@ const App: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         title="تأكيد حذف التقدم"
-        content={
-          <p>
-            هل أنت متأكد من حذف تقدمك؟
-          </p>
-        }
+        content={<p>هل أنت متأكد من حذف تقدمك؟</p>}
         onClose={cancelClearProgress}
         onConfirm={confirmClearProgress}
       />
