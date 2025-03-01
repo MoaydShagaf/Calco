@@ -20,5 +20,6 @@
 { "code": "GE222", "name": "ديناميكا",                    "credit": 3 },
 { "code": "GS115L","name": "الكيمياء معمل",               "credit": 1 },
 { "code": "ME210", "name": "الديناميكا الحرارية",         "credit": 3 },
-{ "code": "GH152", "name": "كتابة تقارير",                "credit": 2 }
+{ "code": "GH152", "name": "كتابة تقارير",                "credit": 2 },
+{ "code": "EE280", "name": "الدوائر الكهربائية",          "credit": 3}
 ]

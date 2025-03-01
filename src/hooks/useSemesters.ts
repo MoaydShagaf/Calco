@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import generalCourses from "../data/general.json";
 import eeeCourses from "../data/eee.json";
 import nuclearCourses from "../data/nuclear.json";
+import mechanicalCourses from '../data/mechanical.json';
 import { computeAllSemesterStats } from "../utils/Calculations";
 import { DepartmentKey } from "../constants/DEPARTMENTS";
 
@@ -58,6 +59,9 @@ export const useSemesters = () => {
         break;
       case "NUCLEAR":
         updatedCourses = [...updatedCourses, ...nuclearCourses.map((course) => ({ ...course, grade: emptyGrade }))];
+        break;
+      case "MECHANICAL":
+        updatedCourses = [...updatedCourses, ...mechanicalCourses.map((course) => ({...course, grade: emptyGrade }))];
         break;
     }
 
