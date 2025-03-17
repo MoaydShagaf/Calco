@@ -4,6 +4,7 @@ import generalCourses from "../data/general.json";
 import eeeCourses from "../data/eee.json";
 import nuclearCourses from "../data/nuclear.json";
 import mechanicalCourses from '../data/mechanical.json';
+import biomedicalCourses from '../data/bme.json';
 import { computeAllSemesterStats } from "../utils/Calculations";
 import { DepartmentKey } from "../constants/DEPARTMENTS";
 
@@ -62,6 +63,9 @@ export const useSemesters = () => {
         break;
       case "MECHANICAL":
         updatedCourses = [...updatedCourses, ...mechanicalCourses.map((course) => ({...course, grade: emptyGrade }))];
+        break;
+      case "BIOMEDICAL":
+        updatedCourses = [...updatedCourses, ...biomedicalCourses.map((course) => ({...course, grade: emptyGrade }))];
         break;
     }
 

@@ -1,0 +1,19 @@
+[
+    { "code": "BME200", "name": "مقدمة إلى الهندسة الطبية", "credit": 3 },
+    { "code": "BME201", "name": "علم أحياء الخلايا", "credit": 3 },
+    { "code": "BME202", "name": "الديناميكا الحرارية", "credit": 3 },
+    { "code": "BME203", "name": "رياضيات 3", "credit": 3 },
+    { "code": "BME204", "name": "رياضيات 4", "credit": 3 },
+    { "code": "BME210", "name": "اوتوكاد (التصميم الحاسوبي)", "credit": 3 },
+    { "code": "BME205", "name": "علم التشريح (اناتومي)", "credit": 3 },
+    { "code": "BME206", "name": "الاحصاء الحيوي والطرق العددية", "credit": 3 },
+    { "code": "BME211", "name": "الميكانيكا الهندسية 2", "credit": 3 },
+    { "code": "BME220", "name": "دوائر كهربائية", "credit": 3 },
+    { "code": "BME260", "name": "مقدمة الى برمجة الحاسوب", "credit": 3 },
+    { "code": "BME301", "name": "الأمان", "credit": 3 },
+    { "code": "BME302", "name": "اشارات ونظم", "credit": 3 },
+    { "code": "BME303", "name": "إدارة العيادات والمستشفيات", "credit": 3 },
+    { "code": "BME304", "name": "الفيزيولوجيا", "credit": 3 },
+    { "code": "BME310", "name": "المواد الحيوية", "credit": 3 },
+    { "code": "BME320", "name": "الكترونية", "credit": 3 }
+]

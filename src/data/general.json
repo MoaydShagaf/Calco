@@ -5,7 +5,7 @@
 { "code": "GS204", "name": "رياضة 4",                     "credit": 3 },
 { "code": "GE121", "name": "استاتيكا ، ميكانيكا هندسية 1", "credit": 3 },
 { "code": "GE125", "name": "الهندسة الوصفية",             "credit": 2 },
-{ "code": "GE127", "name": "الرسم الهندسي",               "credit": 3 },
+{ "code": "GE127", "name": "الرسم الهندسي",               "credit": 2 },
 { "code": "GE129", "name": "تقنية الورش",                 "credit": 2 },
 { "code": "GE133", "name": "خواص المواد",                "credit": 3 },
 { "code": "GS111", "name": "الفيزياء 1",                  "credit": 3 },
